@@ -1,23 +1,21 @@
 var lottery = {
-  maxBall: 50,
-  maxBonusBall: 12,
-  minBall: 1,
-  numOfBalls: 5,
-  numOfBonusBalls: 2,
-  balls: [],
-
   drawEuroMillions() {
-    for (let i = 0; i < this.numOfBalls; i++) {
-      this.balls.push(this.getRandomNumberBetween(this.minBall, this.maxBall));
+    let balls = [];
+    const maxBall = 50;
+    const maxBonusBall = 12;
+    const minBall = 1;
+    const numOfBalls = 5;
+    const numOfBonusBalls = 2;
+
+    for (let i = 0; i < numOfBalls; i++) {
+      balls.push(this.getRandomNumberBetween(minBall, maxBall));
     }
 
-    for (let i = 0; i < this.numOfBonusBalls; i++) {
-      this.balls.push(
-        this.getRandomNumberBetween(this.minBall, this.maxBonusBall)
-      );
+    for (let i = 0; i < numOfBonusBalls; i++) {
+      balls.push(this.getRandomNumberBetween(minBall, maxBonusBall));
     }
 
-    return this.balls;
+    return balls;
   },
 
   getRandomNumberBetween(min, max) {
