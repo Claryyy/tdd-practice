@@ -37,11 +37,22 @@ describe("euromillions tests", () => {
     let result = [];
 
     for (let i = 0; i < 500; i++) {
-      let myDraw = lottery.drawEuroMillions();
+      let myDraw = lottery.drawEuroMillions().slice(0, 5);
       result = result.concat(myDraw);
     }
     expect(result).toContain(1);
     expect(result).toContain(50);
+  });
+
+  test("that if we draw 500 times, at least one of the bonus ball is equal to 1 and that another bonus ball is equal to 12", () => {
+    let result = [];
+
+    for (let i = 0; i < 500; i++) {
+      let myDraw = lottery.drawEuroMillions().slice(5, 7);
+      result = result.concat(myDraw);
+    }
+    expect(result).toContain(1);
+    expect(result).toContain(12);
   });
 
   test("that the balls returned are integers, not floating point numbers", () => {
@@ -49,6 +60,28 @@ describe("euromillions tests", () => {
 
     for (let i = 0; i < myDraw.length; i++) {
       expect(myDraw[i] % 1).toBe(0);
+    }
+  });
+
+  test("that if we draw 500 times, there are no duplicates in the first set of balls", () => {
+    for (let i = 0; i < 500; i++) {
+      let myDraw = lottery.drawEuroMillions().slice(0, 5);
+
+      for (let j = 0; j < myDraw.length; j++) {
+        let filteredDraw = myDraw.filter((ball) => ball === myDraw[j]);
+        expect(filteredDraw).toHaveLength(1);
+      }
+    }
+  });
+
+  test("that if we draw 500 times, there are no duplicates in the first set of balls", () => {
+    for (let i = 0; i < 500; i++) {
+      let myDraw = lottery.drawEuroMillions().slice(5, 7);
+
+      for (let j = 0; j < myDraw.length; j++) {
+        let filteredDraw = myDraw.filter((ball) => ball === myDraw[j]);
+        expect(filteredDraw).toHaveLength(1);
+      }
     }
   });
 });
