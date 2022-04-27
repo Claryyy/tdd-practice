@@ -4,6 +4,7 @@
 // Joe cannot receive duplicates in a set, but it's ok for duplicates across the two sets
 // Joe expects the balls in a set to be returned in numerical order
 
+const { drawEuroMillions } = require("./euromillions");
 const lottery = require("./euromillions");
 
 describe("Joe's Euro millions lottery ball generator... tests", () => {
@@ -12,25 +13,29 @@ describe("Joe's Euro millions lottery ball generator... tests", () => {
   });
 
   test("...Joe expects the first 5 to be between 1 and 50", () => {
-    let firstFiveBalls = lottery.drawEuroMillions().slice(0, 5);
+    for (let i = 0; i < 500; i++) {
+      let firstFiveBalls = lottery.drawEuroMillions().slice(0, 5);
 
-    firstFiveBalls.forEach((ball) => {
-      expect(ball).toBeGreaterThanOrEqual(1);
-      expect(ball).toBeLessThanOrEqual(50);
-    });
+      firstFiveBalls.forEach((ball) => {
+        expect(ball).toBeGreaterThanOrEqual(1);
+        expect(ball).toBeLessThanOrEqual(50);
+      });
 
-    expect(firstFiveBalls).toHaveLength(5);
+      expect(firstFiveBalls).toHaveLength(5);
+    }
   });
 
   test("...Joe expects the last 2 to be between 1 and 12", () => {
-    let lastTwoBalls = lottery.drawEuroMillions().slice(5, 7);
+    for (let i = 0; i < 500; i++) {
+      let lastTwoBalls = lottery.drawEuroMillions().slice(5, 7);
 
-    lastTwoBalls.forEach((ball) => {
-      expect(ball).toBeGreaterThanOrEqual(1);
-      expect(ball).toBeLessThanOrEqual(12);
-    });
+      lastTwoBalls.forEach((ball) => {
+        expect(ball).toBeGreaterThanOrEqual(1);
+        expect(ball).toBeLessThanOrEqual(12);
+      });
 
-    expect(lastTwoBalls).toHaveLength(2);
+      expect(lastTwoBalls).toHaveLength(2);
+    }
   });
 
   test("...Joe expects to get a 50 or a 1 from the first set if he draws 500 times", () => {
@@ -82,6 +87,20 @@ describe("Joe's Euro millions lottery ball generator... tests", () => {
         let filteredDraw = myDraw.filter((ball) => ball === myDraw[j]);
         expect(filteredDraw).toHaveLength(1);
       }
+    }
+  });
+
+  test("...Joe expects the balls in each set to be returned in numerical order.", () => {
+    for (let i = 0; i < 500; i++) {
+      let myDraw1stSet = lottery.drawEuroMillions().slice(0, 5);
+      let myDraw2ndSet = lottery.drawEuroMillions().slice(5, 7);
+
+      expect(myDraw1stSet).toStrictEqual(
+        [...myDraw1stSet].sort((a, b) => a - b)
+      );
+      expect(myDraw2ndSet).toStrictEqual(
+        [...myDraw2ndSet].sort((a, b) => a - b)
+      );
     }
   });
 });

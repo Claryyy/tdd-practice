@@ -14,6 +14,7 @@ var lottery = {
       if (balls.includes(newBall) === false) {
         balls.push(newBall);
       }
+      balls.sort((a, b) => a - b);
     }
 
     for (let i = 0; bonusBalls.length < numOfBonusBalls; i++) {
@@ -22,8 +23,8 @@ var lottery = {
       if (bonusBalls.includes(newBall) === false) {
         bonusBalls.push(newBall);
       }
+      bonusBalls.sort((a, b) => a - b);
     }
-
     return balls.concat(bonusBalls);
   },
 
@@ -32,10 +33,6 @@ var lottery = {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1) + min);
   },
-
-  orderNumerically() {},
-
-  removeDuplicateNumbers() {},
 };
 
 module.exports = lottery;
