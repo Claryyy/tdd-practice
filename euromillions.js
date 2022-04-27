@@ -1,3 +1,9 @@
+function getRandomNumberBetween(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
 var lottery = {
   drawEuroMillions() {
     let balls = [];
@@ -9,7 +15,7 @@ var lottery = {
     const numOfBonusBalls = 2;
 
     for (let i = 0; balls.length < numOfBalls; i++) {
-      let newBall = this.getRandomNumberBetween(minBall, maxBall);
+      let newBall = getRandomNumberBetween(minBall, maxBall);
 
       if (balls.includes(newBall) === false) {
         balls.push(newBall);
@@ -18,7 +24,7 @@ var lottery = {
     }
 
     for (let i = 0; bonusBalls.length < numOfBonusBalls; i++) {
-      let newBall = this.getRandomNumberBetween(minBall, maxBonusBall);
+      let newBall = getRandomNumberBetween(minBall, maxBonusBall);
 
       if (bonusBalls.includes(newBall) === false) {
         bonusBalls.push(newBall);
@@ -26,12 +32,6 @@ var lottery = {
       bonusBalls.sort((a, b) => a - b);
     }
     return balls.concat(bonusBalls);
-  },
-
-  getRandomNumberBetween(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1) + min);
   },
 };
 
