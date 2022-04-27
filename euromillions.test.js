@@ -6,12 +6,12 @@
 
 const lottery = require("./euromillions");
 
-describe("euromillions tests", () => {
-  test("that the drawEuromillions function returns an array of 7 balls", () => {
+describe("Joe's Euro millions lottery ball generator... tests", () => {
+  test("...Joe expects to be given 7 balls", () => {
     expect(lottery.drawEuroMillions()).toHaveLength(7);
   });
 
-  test("that the drawEuromillions returns the first 5 balls between 1 and 50 (set 1)", () => {
+  test("...Joe expects the first 5 to be between 1 and 50", () => {
     let firstFiveBalls = lottery.drawEuroMillions().slice(0, 5);
 
     firstFiveBalls.forEach((ball) => {
@@ -22,7 +22,7 @@ describe("euromillions tests", () => {
     expect(firstFiveBalls).toHaveLength(5);
   });
 
-  test("that the drawEuromillions returns the last 2 balls between 1 and 12 (set 2)", () => {
+  test("...Joe expects the last 2 to be between 1 and 12", () => {
     let lastTwoBalls = lottery.drawEuroMillions().slice(5, 7);
 
     lastTwoBalls.forEach((ball) => {
@@ -33,7 +33,7 @@ describe("euromillions tests", () => {
     expect(lastTwoBalls).toHaveLength(2);
   });
 
-  test("that if we draw 500 times, at least one of the ball is equal to 1 and that another ball is equal to 50", () => {
+  test("...Joe expects to get a 50 or a 1 from the first set if he draws 500 times", () => {
     let result = [];
 
     for (let i = 0; i < 500; i++) {
@@ -44,7 +44,7 @@ describe("euromillions tests", () => {
     expect(result).toContain(50);
   });
 
-  test("that if we draw 500 times, at least one of the bonus ball is equal to 1 and that another bonus ball is equal to 12", () => {
+  test("...Joe expects to get a 12 or a 1 from the second set if he draws 500 times", () => {
     let result = [];
 
     for (let i = 0; i < 500; i++) {
@@ -55,7 +55,7 @@ describe("euromillions tests", () => {
     expect(result).toContain(12);
   });
 
-  test("that the balls returned are integers, not floating point numbers", () => {
+  test("...Joe expects to get whole numbers", () => {
     let myDraw = lottery.drawEuroMillions();
 
     for (let i = 0; i < myDraw.length; i++) {
@@ -63,7 +63,7 @@ describe("euromillions tests", () => {
     }
   });
 
-  test("that if we draw 500 times, there are no duplicates in the first set of balls", () => {
+  test("...Joe cannot receive doubles in a set (1st set)", () => {
     for (let i = 0; i < 500; i++) {
       let myDraw = lottery.drawEuroMillions().slice(0, 5);
 
@@ -74,7 +74,7 @@ describe("euromillions tests", () => {
     }
   });
 
-  test("that if we draw 500 times, there are no duplicates in the first set of balls", () => {
+  test("...Joe cannot receive doubles in a set (2nd set)", () => {
     for (let i = 0; i < 500; i++) {
       let myDraw = lottery.drawEuroMillions().slice(5, 7);
 
